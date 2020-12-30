@@ -25,7 +25,7 @@ export const Register = (props) => {
                 "bio": bio.current.value,
                 "email": email.current.value,
                 "password": password.current.value,
-                "profile_photo": profile_image_url.current.value,
+                "profile_photo": profile_photo.current.value,
                 "birthday": birthday.current.value
             }
 
@@ -40,7 +40,7 @@ export const Register = (props) => {
                 .then(res => res.json())
                 .then(res => {
                     if ("token" in res) {
-                        localStorage.setItem("rare_user_id", res.token)
+                        localStorage.setItem("dreamcatcher_user_id", res.token)
                        
                         props.history.push("/")
                     }
@@ -89,8 +89,8 @@ export const Register = (props) => {
                     <textarea ref={profile_photo} name="profile_photo" className="form-control" />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="birthday"> Profile URL: </label>
-                    <textarea ref={birthday} name="birthday" className="form-control" />
+                    <label htmlFor="birthday"> Birthday </label>
+                    <textarea ref={birthday} name="birthday" className="form-control" placeholder="YYYY-MM-DD" />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"

@@ -1,19 +1,15 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { ApplicationViews } from "./ApplicationViews"
-// import { NavBar } from "./nav/NavBar"
-// import { Login } from "./auth/Login"
+import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
-import { ProfileProvider } from "./auth/AuthProvider"
 
 
 export const Dreamcatcher = () => (
     <>
-    <ProfileProvider>
         <Route render={() => {
             if (localStorage.getItem("dreamcatcher_user_id")) {
                 return <>
-                    <NavBar />
                     <ApplicationViews />
                 </>
             } else {
@@ -36,6 +32,5 @@ export const Dreamcatcher = () => (
                 return <Register history={props.history} />
             }
         }} />
-    </ProfileProvider>
     </>
 )
