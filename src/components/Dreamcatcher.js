@@ -1,6 +1,7 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { ApplicationViews } from "./ApplicationViews"
+import { NavBar } from "./navbar/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 
@@ -10,6 +11,7 @@ export const Dreamcatcher = () => (
         <Route render={() => {
             if (localStorage.getItem("dreamcatcher_user_id")) {
                 return <>
+                    <Route render={props => <NavBar {...props} />} />
                     <ApplicationViews />
                 </>
             } else {
