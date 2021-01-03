@@ -1,22 +1,27 @@
-import { Link } from "react-router-dom"
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
 import "./NavBar.css"
-import Img from '../img/dream-catcher.png'
+import Img from '../img/dream-catcher-logo.png'
 
 export const NavBar = (props) => {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" className="revolving-navbar d-flex justify-content-center fixed-top">
+            <Navbar variant="light" className="dreamcatcher-navbar d-flex fixed-top">
+                <Navbar.Brand>
+                    <img
+                        src={Img}
+                        // className="d-inline-block align-top"
+                        alt="dreamcatcher logo"
+                        />
+                </Navbar.Brand>
                     <ul className="navbar__actual">
-                            <Button variant="primary" className="navbar__link" onClick={() => props.history.push("/new-dream")}>New Dream</Button>
-                            <Button variant="primary" className="navbar__link" onClick={() => props.history.push("/all-dreams")}>All Dreams</Button>
-                            <Button variant="primary" className="navbar__link" onClick={() => props.history.push("/dream-land")}>Dream Land</Button>
-                            <Button variant="danger" className="navbar__link" onClick={() => props.history.push("/logout")}>Logout</Button>
+                            <Button variant="primary" size="lg" className="navbar__link" onClick={() => props.history.push("/new-dream")}>New Dream</Button>
+                            <Button variant="primary" size="lg" className="navbar__link" onClick={() => props.history.push("/all-dreams")}>All Dreams</Button>
+                            <Button variant="primary" size="lg" className="navbar__link" onClick={() => props.history.push("/dream-land")}>Dream Land</Button>
+                            <Button variant="danger" size="lg" className="navbar__link" onClick={() => props.history.push("/logout")}>Logout</Button>
                     </ul>
             </Navbar>
-            <img src={Img} alt="dreamcatcher logo" />
         </>
     )
 }

@@ -11,15 +11,18 @@
 }
 
 .navbar__link {
-    color: #DC3545;
+    color: black;
     /* border: 2px solid #DC3545; */
-    padding: 0.5px;
-    font-family: 'Raleway', sans-serif;
+    padding: 9.5px!important;
 
 }
 
-.nav-profilePhoto {
-    width: 66px;
-    border-radius: 33px;
-    cursor: pointer;
+img {
+    justify-content: left;
+    margin: 0;
+    padding: 0;
+}
+
+.dreamcatcher-navbar {
+    background-color: aliceblue!important;
 }
