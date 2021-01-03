@@ -1,0 +1,28 @@
+.navbar__actual {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    width: 541px;
+}
+
+.navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+}
+
+.navbar__link {
+    color: black;
+    /* border: 2px solid #DC3545; */
+    padding: 9.5px!important;
+
+}
+
+img {
+    justify-content: left;
+    margin: 0;
+    padding: 0;
+}
+
+.dreamcatcher-navbar {
+    background-color: aliceblue!important;
+}
