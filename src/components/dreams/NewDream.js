@@ -3,6 +3,7 @@ import { faMicrophoneAlt, faRedo, faStopCircle } from '@fortawesome/free-solid-s
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { DreamsContext } from "./DreamsProvider"
 import { DreamTypeContext } from "../dreamtype/DreamTypeProvider"
 import { ExerciseTypeContext } from "../exercise/ExerciseTypeProvider"
 import "./NewDream.css"
@@ -11,6 +12,7 @@ export const NewDream = (props) => {
     const { transcript, resetTranscript } = useSpeechRecognition()
     const { getAllDreamTypes, dreamTypes } = useContext( DreamTypeContext )
     const { getAllExerciseTypes, exerciseTypes } = useContext( ExerciseTypeContext )
+    const { addNewDream } = useContext( DreamsContext )
 
     // get dreamTypes, and exerciseTypes to populate the dropdown
     useEffect(() => {
@@ -18,12 +20,29 @@ export const NewDream = (props) => {
       getAllExerciseTypes()
     }, [])
 
+    const [dream, setDream] = useState({})
+
+    // if browser doesn't support speech recognition return null
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
       return null
     }
 
+    // function to be passed to the start-recording onClick to enable continuous recording.
     const startListening = () => {
         return SpeechRecognition.startListening({ continuous: true })
+    }
+
+
+    const handleControlledInputChange = (e) => {
+      const newDream = Object.assign({}, dream)     // create a copy
+      newDream[e.target.name] = e.target.value      // modify a copy
+      setDream(newDream)
+    }
+
+    const constructNewDream = () => {
+        addNewDream({
+            
+        })
     }
   
     return (
