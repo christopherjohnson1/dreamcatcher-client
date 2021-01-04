@@ -1,0 +1,33 @@
+.speech-recog {
+    margin-top: 125px;
+}
+
+.start-recording {
+    font-size: 6em;
+    color: #d9534f;
+    cursor: pointer;
+}
+
+.start-recording:hover {
+    color: red;
+}
+
+.stop-recording {
+    font-size: 3em;
+    color: #000000;
+    cursor: pointer;
+}
+
+.stop-recording:hover {
+    color: #6b6969;
+}
+
+.reset-recording {
+    font-size: 2em;
+    color: #000000;
+    cursor: pointer;
+}
+
+.reset-recording:hover {
+    color: #6b6969;
+}
