@@ -13,7 +13,7 @@
 }
 
 .stop-recording {
-    font-size: 4em;
+    font-size: 3em;
     color: #000000;
     cursor: pointer;
 }
@@ -23,7 +23,7 @@
 }
 
 .reset-recording {
-    font-size: 3em;
+    font-size: 2em;
     color: #000000;
     cursor: pointer;
 }

@@ -18,10 +18,22 @@ export const DreamsProvider = (props) => {
             .then(setDreams)
     }
 
+    const addNewDream = newDream => {
+        return fetch("http://localhost:8000/dreams", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
+            },
+            body: JSON.stringify(newDream)
+        })
+    }
+
     return (
         <DreamsContext.Provider value={{
             dreams,
-            getAllDreams
+            getAllDreams,
+            addNewDream
         }}>
             {props.children}
         </DreamsContext.Provider>
