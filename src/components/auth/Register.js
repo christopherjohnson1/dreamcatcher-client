@@ -42,7 +42,7 @@ export const Register = (props) => {
                     if ("token" in res) {
                         localStorage.setItem("dreamcatcher_user_id", res.token)
                        
-                        props.history.push("/")
+                        props.history.push("/new-dream")
                     }
                 })
         } else {

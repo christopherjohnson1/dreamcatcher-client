@@ -6,19 +6,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DreamsContext } from "./DreamsProvider"
 import { DreamTypeContext } from "../dreamtype/DreamTypeProvider"
 import { ExerciseTypeContext } from "../exercise/ExerciseTypeProvider"
+import { MoonPhaseContext } from "../moonphase/MoonPhaseProvider"
+import { StressTypeContext } from "../stress/StressTypeProvider"
 import "./NewDream.css"
 
 export const NewDream = (props) => {
     const { transcript, resetTranscript } = useSpeechRecognition()
     const { getAllDreamTypes, dreamTypes } = useContext( DreamTypeContext )
     const { getAllExerciseTypes, exerciseTypes } = useContext( ExerciseTypeContext )
+    const { getAllMoonPhases, moonPhases } = useContext( MoonPhaseContext )
+    const { getAllStressTypes, stressTypes } = useContext( StressTypeContext )
     const { addNewDream, dreams, getAllDreams, updateDream } = useContext( DreamsContext )
 
-    // get dreamTypes, and exerciseTypes to populate the dropdown
+    // get dreamTypes, exerciseTypes, moonPhases, and stressTypes to populate the dropdown
     useEffect(() => {
         getAllDreams()
         getAllDreamTypes()
         getAllExerciseTypes()
+        getAllMoonPhases()
+        getAllStressTypes()
     }, [])
     
     useEffect(() => {
@@ -26,6 +32,7 @@ export const NewDream = (props) => {
     }, [])
 
     const [dream, setDream] = useState({})
+    const [checked, setChecked] = useState(false)
     
     // if browser doesn't support speech recognition return null
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -55,13 +62,19 @@ export const NewDream = (props) => {
       setDream(newDream)
     }
 
+    // changes the value of the checkbox
+    const checkboxHandler = () => {
+        setChecked(!checked)
+    }
+
+    // saves dream changes if in editMode, or saves a new dream if not in edit mode
     const constructNewDream = () => {
         if (editMode) {
             updateDream({
                 id: dream.id,
                 title: dream.title,
                 dream_story: dream.dream_story,
-                private: false,
+                private: checked,
                 dream_type_id: parseInt(dream.dream_type_id),
                 exercise_id: parseInt(dream.exercise_id),
                 stress_id: parseInt(2),
@@ -72,7 +85,7 @@ export const NewDream = (props) => {
             addNewDream({
                 title: dream.title,
                 dream_story: transcript,
-                private: false,
+                private: checked,
                 dream_type_id: parseInt(dream.dream_type_id),
                 exercise_id: parseInt(dream.exercise_id),
                 stress_id: parseInt(2),
@@ -84,13 +97,15 @@ export const NewDream = (props) => {
   
     return (
       <div className="container">
+          {/* Begin Speech Recognition Section */}
         <div className="d-flex justify-content-center speech-recog">
           <FontAwesomeIcon className="start-recording" onClick={startListening} icon={faMicrophoneAlt} />
           <FontAwesomeIcon className="stop-recording" onClick={SpeechRecognition.stopListening} icon={faStopCircle} />
           <FontAwesomeIcon className="reset-recording" onClick={resetTranscript} icon={faRedo} />
         </div>
+        {/* End Speech Recogntion Section */}
         <form className="DreamForm">
-            <h3 className="DreamForm__header text-center">{editMode ? "Edit Your Dream" : "Save A New Dream"}</h3>
+            <h3 className="DreamForm__header text-center">{editMode ? "Edit Your Dream" : "Record A New Dream"}</h3>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="title">Title :</label>
@@ -119,7 +134,7 @@ export const NewDream = (props) => {
                         value={dream.dream_type_id}
                         onChange={handleControlledInputChange}>
 
-                            <option value="0">Select a dream type</option>
+                            <option value="0">Select a dream type...</option>
                             {dreamTypes.map(d => (
                                 <option key={d.id} value={d.id}>
                                     {d.label}
@@ -145,13 +160,53 @@ export const NewDream = (props) => {
                         </select>
                 </div>
             </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="stress_id">Any stressful events? </label>
+                    <select name="stress_id" className="form-control"
+                        proptype="int"
+                        value={dream.stress_id}
+                        onChange={handleControlledInputChange}>
+
+                            <option value="0">Select stress event...</option>
+                            {stressTypes.map(s => (
+                                <option key={s.id} value={s.id}>
+                                    {s.stress_event}
+                                </option>
+                            ))}
+                        </select>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="moon_phase_id">What was the moon phase? </label>
+                    <select name="moon_phase_id" className="form-control"
+                        proptype="int"
+                        value={dream.moon_phase_id}
+                        onChange={handleControlledInputChange}>
+
+                            <option value="0">Select moon phase...</option>
+                            {moonPhases.map(m => (
+                                <option key={m.id} value={m.id}>
+                                    {m.label}
+                                </option>
+                            ))}
+                        </select>
+                </div>
+            </fieldset>
+            <div>
+                <label>
+                    <input type="checkbox" id="private-checkbox" checked={checked} onChange={checkboxHandler}></input>
+                    Private?
+                </label>
+            </div>
 
             <button type="submit"
                 onClick={e => {
                     e.preventDefault()
                     constructNewDream()
                 }}
-                className="btn btn-form btn-warning btn-sm mt-3">
+                className="btn btn-form btn-warning btn-sm mb-3">
                     {editMode ? "Save Updates" : "Save New Dream"}
                 </button>
         </form>
