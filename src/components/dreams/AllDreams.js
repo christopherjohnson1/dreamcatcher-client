@@ -42,19 +42,22 @@ export const AllDreams = props => {
             </h1>
 
             {showOthersDreams ?
+                // Show the dreams in the all dreams list that are not marked private
                 dreams.map(d => {
-                    return <Card body className="my-3 d-flex">
-                            <Container>
-                                <Row>
-                                    <Col>{d.date}</Col>
-                                    <Col className="text-center">{d.title}</Col>
-                                    <Col className="text-center">{d.user.full_name}</Col>
-                                </Row>
-                                <Row>
-                                    <Col className="text-center pt-4">{d.dream_type.label}</Col>
-                                </Row>
-                            </Container>
-                        </Card>
+                    if (!d.private) {
+                        return <Card body className="my-3 d-flex">
+                                <Container>
+                                    <Row>
+                                        <Col>{d.date}</Col>
+                                        <Col className="text-center">{d.title}</Col>
+                                        <Col className="text-center">{d.user.full_name}</Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className="text-center pt-4">{d.dream_type.label}</Col>
+                                    </Row>
+                                </Container>
+                            </Card>
+                    }
                 }) 
                 : myDreams.map(d => {
                     return <Card body className="my-3 d-flex">
@@ -63,6 +66,9 @@ export const AllDreams = props => {
                             <Col>{d.date}</Col>
                             <Col className="text-center">{d.title}</Col>
                             <Col className="text-center">{profile.full_name}</Col>
+                        </Row>
+                        <Row>
+                            <Col className="text-center pt-4">{d.dream_type.label}</Col>
                         </Row>
                     </Container>
                 </Card>
