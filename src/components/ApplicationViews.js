@@ -1,14 +1,33 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { NewDream } from "./newdream/NewDream"
+import { DreamsProvider } from './dreams/DreamsProvider'
+import { DreamTypeProvider } from './dreamtype/DreamTypeProvider'
+import { ExerciseTypeProvider } from './exercise/ExerciseTypeProvider'
+import { MoonPhaseProvider } from './moonphase/MoonPhaseProvider'
+import { StressTypeProvider } from './stress/StressTypeProvider'
+import { NewDream } from "./dreams/NewDream"
+import { AllDreams } from './dreams/AllDreams'
 
 export const ApplicationViews = (props) => {
 
     return (
         <>
-        <Route exact path="/new-dream" render={(props) => {
-            return <NewDream {...props} />
-        }} />
+        <DreamsProvider>
+            <DreamTypeProvider>
+                <ExerciseTypeProvider>
+                    <MoonPhaseProvider>
+                        <StressTypeProvider>
+                            <Route exact path="/all-dreams" render={(props) => {
+                                return <AllDreams {...props} />
+                            }} />
+                            <Route exact path="/new-dream" render={(props) => {
+                                return <NewDream {...props} />
+                            }} />
+                        </StressTypeProvider>
+                    </MoonPhaseProvider>
+                </ExerciseTypeProvider>
+            </DreamTypeProvider>
+        </DreamsProvider>
         
         <Route path="/logout" render={
             (props) => {
@@ -16,6 +35,7 @@ export const ApplicationViews = (props) => {
                 props.history.push("/login")
             }
         } />
+
         </>
     )
 }
