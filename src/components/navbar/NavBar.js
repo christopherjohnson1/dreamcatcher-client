@@ -18,7 +18,7 @@ export const NavBar = (props) => {
                     <ul className="navbar__actual">
                             <Button variant="primary" size="lg" className="navbar__link" onClick={() => props.history.push("/new-dream")}>New Dream</Button>
                             <Button variant="primary" size="lg" className="navbar__link" onClick={() => props.history.push("/all-dreams")}>All Dreams</Button>
-                            <Button variant="primary" size="lg" className="navbar__link" onClick={() => props.history.push("/dream-land")}>Dream Land</Button>
+                            <Button variant="primary" size="lg" className="navbar__link" onClick={() => props.history.push("/all-dreams/my-dreams")}>My Dreams</Button>
                             <Button variant="danger" size="lg" className="navbar__link" onClick={() => props.history.push("/logout")}>Logout</Button>
                     </ul>
             </Navbar>
