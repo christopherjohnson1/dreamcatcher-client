@@ -80,18 +80,18 @@ export const NewDream = (props) => {
                 stress_id: parseInt(2),
                 moon_phase_id: parseInt(2)
             })
-                .then(() => props.history.push("/all-dreams"))
+                .then(() => props.history.push("/all-dreams/my-dreams"))
         } else {
             addNewDream({
                 title: dream.title,
-                dream_story: transcript,
+                dream_story: transcript.charAt(0).toUpperCase() + transcript.slice(1),
                 private: checked,
                 dream_type_id: parseInt(dream.dream_type_id),
                 exercise_id: parseInt(dream.exercise_id),
                 stress_id: parseInt(2),
                 moon_phase_id: parseInt(2)
             })
-                .then(() => props.history.push("/all-dreams"))
+                .then(() => props.history.push("/all-dreams/my-dreams"))
         }
     }
   
@@ -121,7 +121,7 @@ export const NewDream = (props) => {
                     <label htmlFor="dream_story">Dream Story :</label>
                     <textarea type="text" name="content" rows="15" required autoFocus className="form-control"
                         placeholder="Click the red microphone to start recording, click the black stop button to end recording, and the circle arrow to reset the transcript."
-                        defaultValue={transcript}
+                        defaultValue={transcript.charAt(0).toUpperCase() + transcript.slice(1)}
                         onChange={handleControlledInputChange}
                     />
                 </div>
@@ -206,7 +206,7 @@ export const NewDream = (props) => {
                     e.preventDefault()
                     constructNewDream()
                 }}
-                className="btn btn-form btn-warning btn-sm mb-3">
+                className="btn btn-form btn-success btn-sm mb-3">
                     {editMode ? "Save Updates" : "Save New Dream"}
                 </button>
         </form>

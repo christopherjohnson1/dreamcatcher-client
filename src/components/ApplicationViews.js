@@ -5,6 +5,7 @@ import { DreamTypeProvider } from './dreamtype/DreamTypeProvider'
 import { ExerciseTypeProvider } from './exercise/ExerciseTypeProvider'
 import { MoonPhaseProvider } from './moonphase/MoonPhaseProvider'
 import { StressTypeProvider } from './stress/StressTypeProvider'
+import { ProfileProvider } from './auth/AuthProvider'
 import { NewDream } from "./dreams/NewDream"
 import { AllDreams } from './dreams/AllDreams'
 
@@ -17,12 +18,21 @@ export const ApplicationViews = (props) => {
                 <ExerciseTypeProvider>
                     <MoonPhaseProvider>
                         <StressTypeProvider>
+                            <ProfileProvider>
+
                             <Route exact path="/all-dreams" render={(props) => {
                                 return <AllDreams {...props} />
                             }} />
+                            
+                            <Route exact path="/all-dreams/my-dreams" render={(props) => {
+                                return <AllDreams {...props} />
+                            }} />
+
                             <Route exact path="/new-dream" render={(props) => {
                                 return <NewDream {...props} />
                             }} />
+
+                            </ProfileProvider>
                         </StressTypeProvider>
                     </MoonPhaseProvider>
                 </ExerciseTypeProvider>
