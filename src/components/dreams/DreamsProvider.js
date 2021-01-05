@@ -4,6 +4,7 @@ export const DreamsContext = React.createContext()
 
 export const DreamsProvider = (props) => {
     const [ dreams, setDreams ] = useState([])
+    const [ myDreams, setMyDreams ] = useState([])
 
     const token = localStorage.getItem("dreamcatcher_user_id")
 
@@ -16,6 +17,16 @@ export const DreamsProvider = (props) => {
         })
             .then(res => res.json())
             .then(setDreams)
+    }
+
+    const getDreamsByUser = (user_id) => {
+        return fetch(`http://localhost:8000/dreams?user_id=${user_id}`, {
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
+            .then(r => r.json())
+            .then(setMyDreams)
     }
 
     const addNewDream = newDream => {
@@ -45,7 +56,9 @@ export const DreamsProvider = (props) => {
             dreams,
             getAllDreams,
             addNewDream,
-            updateDream
+            updateDream,
+            getDreamsByUser,
+            myDreams
         }}>
             {props.children}
         </DreamsContext.Provider>

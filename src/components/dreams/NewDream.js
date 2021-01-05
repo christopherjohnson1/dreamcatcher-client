@@ -80,7 +80,7 @@ export const NewDream = (props) => {
                 stress_id: parseInt(2),
                 moon_phase_id: parseInt(2)
             })
-                .then(() => props.history.push("/all-dreams"))
+                .then(() => props.history.push("/all-dreams/my-dreams"))
         } else {
             addNewDream({
                 title: dream.title,
@@ -91,7 +91,7 @@ export const NewDream = (props) => {
                 stress_id: parseInt(2),
                 moon_phase_id: parseInt(2)
             })
-                .then(() => props.history.push("/all-dreams"))
+                .then(() => props.history.push("/all-dreams/my-dreams"))
         }
     }
   
