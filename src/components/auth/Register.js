@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 // import "./Auth.css"
 
@@ -10,8 +10,24 @@ export const Register = (props) => {
     const password = React.createRef()
     const verifyPassword = React.createRef()
     const passwordDialog = React.createRef()
-    const profile_photo = React.createRef()
+    // const profile_photo = React.createRef()
     const birthday = React.createRef()
+
+    // State for image upload
+    const [base64, setBase64] = useState(null)
+
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader()
+        reader.addEventListener('load', () => callback(reader.result))
+        reader.readAsDataURL(file)
+    }
+
+    const createImageString = (event) => {
+        getBase64(event.target.files[0], (base64ImageString) => {
+            // console.log("Base64 of file is", base64ImageString)
+            setBase64(base64ImageString)
+        })
+    }
 
 
     const handleRegister = (e) => {
@@ -25,7 +41,7 @@ export const Register = (props) => {
                 "bio": bio.current.value,
                 "email": email.current.value,
                 "password": password.current.value,
-                "profile_photo": profile_photo.current.value,
+                "profile_photo": base64,
                 "birthday": birthday.current.value
             }
 
@@ -42,7 +58,7 @@ export const Register = (props) => {
                     if ("token" in res) {
                         localStorage.setItem("dreamcatcher_user_id", res.token)
                        
-                        props.history.push("/new-dream")
+                        props.history.push("/")
                     }
                 })
         } else {
@@ -51,7 +67,7 @@ export const Register = (props) => {
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
+        <main className="container my-3" style={{ textAlign: "center" }}>
 
             <dialog className="dialog dialog--password" ref={passwordDialog}>
                 <div>Passwords do not match</div>
@@ -59,7 +75,7 @@ export const Register = (props) => {
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
+                <h1 className="h3 mb-3 font-weight-normal my-3">Register an account</h1>
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
                     <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
@@ -85,8 +101,8 @@ export const Register = (props) => {
                     <textarea ref={bio} name="bio" className="form-control" placeholder="Let other users know a little bit about you..." />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="profile_photo"> Profile URL: </label>
-                    <textarea ref={profile_photo} name="profile_photo" className="form-control" />
+                    <label htmlFor="image">Profile Photo</label>
+                        <input onChange={createImageString} type="file" name="image" className="form-control" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="birthday"> Birthday </label>
@@ -95,10 +111,10 @@ export const Register = (props) => {
                 <fieldset style={{
                     textAlign: "center"
                 }}>
-                    <button className="btn btn-primary icon-send" type="submit">Register</button>
+                    <button className="btn btn-primary icon-send my-3" type="submit">Register</button>
                 </fieldset>
             </form>
-            <section className="link--register">
+            <section className="link--register mb-5">
                 Already registered? <Link to="/login">Login</Link>
             </section>
         </main>

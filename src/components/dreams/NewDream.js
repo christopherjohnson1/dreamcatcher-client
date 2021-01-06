@@ -52,6 +52,7 @@ export const NewDream = (props) => {
             const dreamId = parseInt(props.match.params.dreamId)
             const dreamToEdit = dreams.find(d => d.id === dreamId) || {}
             setDream(dreamToEdit)
+            setChecked(dreamToEdit.private)
         }
     }
 
@@ -196,19 +197,27 @@ export const NewDream = (props) => {
             </fieldset>
             <div>
                 <label>
-                    <input type="checkbox" id="private-checkbox" checked={checked} onChange={checkboxHandler}></input>
+                    <input type="checkbox" id="private-checkbox" value={checked} checked={checked} onChange={checkboxHandler}></input>
                     Private?
                 </label>
             </div>
-
-            <button type="submit"
-                onClick={e => {
-                    e.preventDefault()
-                    constructNewDream()
-                }}
-                className="btn btn-form btn-success btn-sm mb-3">
-                    {editMode ? "Save Updates" : "Save New Dream"}
+            
+            <div className="text-center">
+                    {editMode ? 
+                    <button type="submit"
+                    onClick={() => {props.history.push('/all-dreams/my-dreams')}}
+                    className="btn btn-form btn-danger btn-sm mb-3 mx-4">
+                        Cancel
+                </button> : ''}
+                <button type="submit"
+                    onClick={e => {
+                        e.preventDefault()
+                        constructNewDream()
+                    }}
+                    className="btn btn-form btn-success btn-sm mb-3">
+                        {editMode ? "Save Updates" : "Save New Dream"}
                 </button>
+            </div>
         </form>
       </div>
     )

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { DreamsContext } from "./DreamsProvider"
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
@@ -14,13 +14,18 @@ export const DreamDetail = (props) => {
         const dreamId = parseInt(props.match.params.dreamId)
         getSingleDream(dreamId)
     }, [])
+    console.log(singleDream)
 
     return (
         <div className="container">
-            <div className="dream-card dream-card">
+            <div>
                 <div className="dream-detail mb-3">
                     <Row>
-                        <Col className="ml-0"><h4>{singleDream.user && singleDream.user.full_name}</h4></Col>
+                        <Col className="user-image"
+                        onClick={() => {props.history.push(`/dreamcatcher-profile/${singleDream.user && singleDream.user.id}`)}}>
+                            <img className="profile-photo" src={singleDream.user && singleDream.user.profile_photo} alt="" />
+                            <h4>{singleDream.user && singleDream.user.full_name}</h4>
+                        </Col>
                         <Col className="text-right"><h3>{singleDream.title}</h3></Col>
                     </Row>
                 </div>
@@ -46,8 +51,8 @@ export const DreamDetail = (props) => {
                     <Col className="text-left"><b>Dream Date:</b> {singleDream.date}</Col>
                 </Row>
                 <Row>
-                    <Col className="text-center mt-5">
-                        <Button onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
+                    <Col className="text-center mt-5 mb-5">
+                        <Button variant="danger" onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
                     </Col>
                 </Row>
             </div>
