@@ -39,15 +39,8 @@ export const DreamcatcherProfileDetail = (props) => {
                     </Container>
                 </Card>
             </div>
-            <div className="mt-3">
-                <Row>
-                    <Col className="text-center mt-5">
-                        <Button variant="danger" className="mx-4" onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
-                        <Button onClick={() => {props.history.push('/all-dreams')}}>See My Dreams</Button>
-                    </Col>
-                </Row>
-            </div>
-            <div>
+            
+            <div className="text-center py-3"> <h4><b>My Dreams</b></h4>
                 {
                     myDreams.map(d => {
                         return <Card body className="my-3 d-flex dream-card"
@@ -65,6 +58,13 @@ export const DreamcatcherProfileDetail = (props) => {
                     </Card>
                     })
                 }
+            </div>
+            <div className="mt-3 mb-5">
+                <Row>
+                    <Col className="text-center mt-5">
+                        <Button variant="danger" className="mx-4" onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
+                    </Col>
+                </Row>
             </div>
         </div>
     )
