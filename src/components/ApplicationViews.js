@@ -6,6 +6,8 @@ import { ExerciseTypeProvider } from './exercise/ExerciseTypeProvider'
 import { MoonPhaseProvider } from './moonphase/MoonPhaseProvider'
 import { StressTypeProvider } from './stress/StressTypeProvider'
 import { ProfileProvider } from './auth/AuthProvider'
+import { DreamcatcherProfileProvider } from './profile/DreamcatcherProfileProvider'
+import { DreamcatcherProfileDetail } from './profile/DreamcatcherProfileDetail'
 import { NewDream } from "./dreams/NewDream"
 import { AllDreams } from './dreams/AllDreams'
 import { DreamDetail } from './dreams/DreamDetail'
@@ -47,6 +49,17 @@ export const ApplicationViews = (props) => {
                 </ExerciseTypeProvider>
             </DreamTypeProvider>
         </DreamsProvider>
+
+        <DreamcatcherProfileProvider>
+            <DreamsProvider>
+
+        <Route exact path="/dreamcatcher-profile/:userId(\d+)" render={props => {
+                return <DreamcatcherProfileDetail {...props} />
+                }} />
+
+            </DreamsProvider>
+        </DreamcatcherProfileProvider>
+
         
         <Route path="/logout" render={
             (props) => {

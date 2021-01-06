@@ -200,15 +200,17 @@ export const NewDream = (props) => {
                     Private?
                 </label>
             </div>
-
-            <button type="submit"
-                onClick={e => {
-                    e.preventDefault()
-                    constructNewDream()
-                }}
-                className="btn btn-form btn-success btn-sm mb-3">
-                    {editMode ? "Save Updates" : "Save New Dream"}
+            
+            <div className="text-center">
+                <button type="submit"
+                    onClick={e => {
+                        e.preventDefault()
+                        constructNewDream()
+                    }}
+                    className="btn btn-form btn-success btn-sm mb-3">
+                        {editMode ? "Save Updates" : "Save New Dream"}
                 </button>
+            </div>
         </form>
       </div>
     )
