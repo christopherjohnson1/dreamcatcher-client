@@ -8,6 +8,7 @@ import { StressTypeProvider } from './stress/StressTypeProvider'
 import { ProfileProvider } from './auth/AuthProvider'
 import { NewDream } from "./dreams/NewDream"
 import { AllDreams } from './dreams/AllDreams'
+import { DreamDetail } from './dreams/DreamDetail'
 
 export const ApplicationViews = (props) => {
 
@@ -28,9 +29,17 @@ export const ApplicationViews = (props) => {
                                 return <AllDreams {...props} />
                             }} />
 
-                            <Route exact path="/new-dream" render={(props) => {
+                            <Route exact path="/" render={(props) => {
                                 return <NewDream {...props} />
                             }} />
+
+                            <Route exact path="/new-dream/edit/:dreamId(\d+)" render={props => {
+                                    return <NewDream {...props} />
+                                    }} />
+                            
+                            <Route exact path="/dream-detail/:dreamId(\d+)" render={props => {
+                                    return <DreamDetail {...props} />
+                                    }} />
 
                             </ProfileProvider>
                         </StressTypeProvider>

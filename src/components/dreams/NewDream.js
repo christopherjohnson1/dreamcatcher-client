@@ -77,8 +77,8 @@ export const NewDream = (props) => {
                 private: checked,
                 dream_type_id: parseInt(dream.dream_type_id),
                 exercise_id: parseInt(dream.exercise_id),
-                stress_id: parseInt(2),
-                moon_phase_id: parseInt(2)
+                stress_id: parseInt(dream.stress_id),
+                moon_phase_id: parseInt(dream.moon_phase_id)
             })
                 .then(() => props.history.push("/all-dreams/my-dreams"))
         } else {
@@ -88,8 +88,8 @@ export const NewDream = (props) => {
                 private: checked,
                 dream_type_id: parseInt(dream.dream_type_id),
                 exercise_id: parseInt(dream.exercise_id),
-                stress_id: parseInt(2),
-                moon_phase_id: parseInt(2)
+                stress_id: parseInt(dream.stress_id),
+                moon_phase_id: parseInt(dream.moon_phase_id)
             })
                 .then(() => props.history.push("/all-dreams/my-dreams"))
         }
@@ -119,9 +119,9 @@ export const NewDream = (props) => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="dream_story">Dream Story :</label>
-                    <textarea type="text" name="content" rows="15" required autoFocus className="form-control"
+                    <textarea type="text" name="dream_story" rows="15" required autoFocus className="form-control"
                         placeholder="Click the red microphone to start recording, click the black stop button to end recording, and the circle arrow to reset the transcript."
-                        defaultValue={transcript.charAt(0).toUpperCase() + transcript.slice(1)}
+                        defaultValue={dream.dream_story || transcript.charAt(0).toUpperCase() + transcript.slice(1)}
                         onChange={handleControlledInputChange}
                     />
                 </div>

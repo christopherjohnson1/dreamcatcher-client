@@ -1,3 +1,7 @@
 .all-dreams {
     margin-top: 125px;
 }
+
+.dream-card {
+    cursor: pointer;
+}
