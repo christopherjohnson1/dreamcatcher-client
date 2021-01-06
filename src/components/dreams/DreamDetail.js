@@ -14,6 +14,7 @@ export const DreamDetail = (props) => {
         const dreamId = parseInt(props.match.params.dreamId)
         getSingleDream(dreamId)
     }, [])
+    console.log(singleDream)
 
     return (
         <div className="container">
@@ -22,6 +23,7 @@ export const DreamDetail = (props) => {
                     <Row>
                         <Col className="user-image"
                         onClick={() => {props.history.push(`/dreamcatcher-profile/${singleDream.user && singleDream.user.id}`)}}>
+                            <img className="profile-photo" src={singleDream.user && singleDream.user.profile_photo} alt="" />
                             <h4>{singleDream.user && singleDream.user.full_name}</h4>
                         </Col>
                         <Col className="text-right"><h3>{singleDream.title}</h3></Col>
@@ -50,7 +52,7 @@ export const DreamDetail = (props) => {
                 </Row>
                 <Row>
                     <Col className="text-center mt-5 mb-5">
-                        <Button onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
+                        <Button variant="danger" onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
                     </Col>
                 </Row>
             </div>

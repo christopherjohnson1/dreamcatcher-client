@@ -52,7 +52,7 @@ export const AllDreams = props => {
                                     <Row>
                                         <Col>{d.date}</Col>
                                         <Col className="text-center">{d.title}</Col>
-                                        <Col className="text-center">{d.user.full_name}</Col>
+                                        <Col className="text-center"><img className="profile-photo-small" src={d.user.profile_photo} alt="" /></Col>
                                     </Row>
                                     <Row>
                                         <Col className="text-center pt-4">{d.dream_type.label}</Col>

@@ -35,14 +35,14 @@ export const Login = props => {
     }
 
     return (
-        <main className="container--login">
+        <main className="container--login container">
             <dialog className="dialog dialog--auth" ref={invalidDialog}>
                 <div>Email or password was not valid.</div>
                 <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
             </dialog>
             <section>
-                <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Talking Heads</h1>
+                <form className="form--login text-center" onSubmit={handleLogin}>
+                    <h1>Dreamcatcher</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>

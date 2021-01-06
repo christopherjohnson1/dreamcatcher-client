@@ -23,6 +23,9 @@ export const DreamcatcherProfileDetail = (props) => {
         <div className="container">
             <div>
                 <div className="dream-detail mb-3">
+                    <div>
+                        <Col className="text-center"><img className="profile-photo" src={profile.profile_photo} alt="" /></Col>
+                    </div>
                     <Row>
                         <Col className="text-center"><h2>{profile.user && profile.user.first_name} {profile.user && profile.user.last_name}</h2></Col>
                     </Row>
@@ -63,6 +66,9 @@ export const DreamcatcherProfileDetail = (props) => {
                 <Row>
                     <Col className="text-center mt-5">
                         <Button variant="danger" className="mx-4" onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
+                    </Col>
+                    <Col className="text-center mt-5">
+                        <Button variant="warning" className="mx-4" onClick={() => {props.history.push('/logout')}}>Logout</Button>
                     </Col>
                 </Row>
             </div>

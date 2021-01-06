@@ -1,7 +1,18 @@
 .all-dreams {
-    margin-top: 125px;
+    margin-top: 175px;
 }
 
 .dream-card {
     cursor: pointer;
+}
+
+.profile-photo-small {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
