@@ -21,6 +21,7 @@ export const AllDreams = props => {
         if (props.match) {
             if (props.match.path === '/all-dreams/my-dreams') {
                 if (profile.user) {
+                    getAllDreams()
                     getDreamsByUser(profile.user.id)
                     setView('mydreams')
                     setShowOthersDreams(false)
@@ -45,7 +46,8 @@ export const AllDreams = props => {
                 // Show the dreams in the all dreams list that are not marked private
                 dreams.map(d => {
                     if (!d.private) {
-                        return <Card body className="my-3 d-flex">
+                        return <Card body className="my-3 d-flex dream-card"
+                                    onClick={() => {props.history.push(`/dream-detail/${d.id}`)}}>
                                 <Container>
                                     <Row>
                                         <Col>{d.date}</Col>
@@ -60,7 +62,8 @@ export const AllDreams = props => {
                     }
                 }) 
                 : myDreams.map(d => {
-                    return <Card body className="my-3 d-flex">
+                    return <Card body className="my-3 d-flex dream-card"
+                    onClick={() => {props.history.push(`/new-dream/edit/${d.id}`)}}>
                     <Container>
                         <Row>
                             <Col>{d.date}</Col>
