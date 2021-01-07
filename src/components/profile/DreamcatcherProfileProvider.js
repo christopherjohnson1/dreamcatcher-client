@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 export const DreamcatcherProfileContext = React.createContext()
 
 export const DreamcatcherProfileProvider = (props) => {
-    const [ profile, setProfile ] = useState([])
+    const [ dreamcatcherProfile, setDreamcatcherProfile ] = useState([])
 
     const token = localStorage.getItem("dreamcatcher_user_id")
 
@@ -16,13 +16,13 @@ export const DreamcatcherProfileProvider = (props) => {
             }
         })
             .then(res => res.json())
-            .then(setProfile)
+            .then(setDreamcatcherProfile)
     }
 
 
     return (
         <DreamcatcherProfileContext.Provider value={{
-            profile,
+            dreamcatcherProfile,
             getSingleProfile
         }}>
             {props.children}

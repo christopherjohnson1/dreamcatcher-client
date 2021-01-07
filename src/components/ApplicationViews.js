@@ -11,6 +11,7 @@ import { DreamcatcherProfileDetail } from './profile/DreamcatcherProfileDetail'
 import { NewDream } from "./dreams/NewDream"
 import { AllDreams } from './dreams/AllDreams'
 import { DreamDetail } from './dreams/DreamDetail'
+import { DreamLand } from './dreamland/DreamLand'
 
 export const ApplicationViews = (props) => {
 
@@ -60,6 +61,9 @@ export const ApplicationViews = (props) => {
             </DreamsProvider>
         </DreamcatcherProfileProvider>
 
+        <Route exact path="/dream-land" render={props => {
+                return <DreamLand {...props} />
+                }} />
         
         <Route path="/logout" render={
             (props) => {
