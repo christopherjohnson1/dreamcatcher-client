@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { DreamcatcherProfileContext } from "./DreamcatcherProfileProvider"
 import { DreamsContext } from "../dreams/DreamsProvider"
+import { ProfileContext } from "../auth/AuthProvider"
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
 import Container from 'react-bootstrap/Container'
@@ -9,8 +10,9 @@ import Col from 'react-bootstrap/Col'
 import "./DreamcatcherProfileDetail.css"
 
 export const DreamcatcherProfileDetail = (props) => {
-    const { getSingleProfile, profile } = useContext(DreamcatcherProfileContext)
+    const { getSingleProfile, dreamcatcherProfile } = useContext(DreamcatcherProfileContext)
     const { getDreamsByUser, myDreams } = useContext(DreamsContext)
+    const { profile } = useContext(ProfileContext)
 
     useEffect(() => {
         const userId = parseInt(props.match.params.userId)
@@ -18,16 +20,18 @@ export const DreamcatcherProfileDetail = (props) => {
         getDreamsByUser(userId)
     }, [])
 
+    const profileMatch = profile.id === dreamcatcherProfile.id
+
 
     return (
         <div className="container">
             <div>
                 <div className="dream-detail mb-3">
                     <div>
-                        <Col className="text-center"><img className="profile-photo" src={profile.profile_photo} alt="" /></Col>
+                        <Col className="text-center"><img className="profile-photo" src={dreamcatcherProfile.profile_photo} alt="" /></Col>
                     </div>
                     <Row>
-                        <Col className="text-center"><h2>{profile.user && profile.user.first_name} {profile.user && profile.user.last_name}</h2></Col>
+                        <Col className="text-center"><h2>{dreamcatcherProfile.user && dreamcatcherProfile.user.first_name} {dreamcatcherProfile.user && dreamcatcherProfile.user.last_name}</h2></Col>
                     </Row>
                 </div>
                 <Card body>
@@ -37,7 +41,7 @@ export const DreamcatcherProfileDetail = (props) => {
                         <Col className="text-center pt-y mb-2"><h4>Bio</h4></Col>
                         </Row>
                         <Row>
-                            <Col className="text-center">{profile.bio}</Col>
+                            <Col className="text-center">{dreamcatcherProfile.bio}</Col>
                         </Row>
                     </Container>
                 </Card>
@@ -52,7 +56,7 @@ export const DreamcatcherProfileDetail = (props) => {
                             <Row>
                                 <Col>{d.date}</Col>
                                 <Col className="text-center">{d.title}</Col>
-                                <Col className="text-center">{profile.full_name}</Col>
+                                <Col className="text-center">{dreamcatcherProfile.full_name}</Col>
                             </Row>
                             <Row>
                                 <Col className="text-center pt-4">{d.dream_type.label}</Col>
@@ -67,9 +71,11 @@ export const DreamcatcherProfileDetail = (props) => {
                     <Col className="text-center mt-5">
                         <Button variant="danger" className="mx-4" onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
                     </Col>
-                    <Col className="text-center mt-5">
+                    {profileMatch ? 
+                        <Col className="text-center mt-5">
                         <Button variant="warning" className="mx-4" onClick={() => {props.history.push('/logout')}}>Logout</Button>
-                    </Col>
+                        </Col> : ''
+                    }
                 </Row>
             </div>
         </div>

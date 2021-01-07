@@ -10,7 +10,7 @@ export const NavBar = (props) => {
 
     return (
         <>
-            <Navbar variant="dark" className="dreamcatcher-navbar d-flex fixed-top container">
+            <Navbar variant="dark" className="dreamcatcher-navbar d-flex fixed-top container navbar-collapse">
                 <Navbar.Brand>
                     <img
                         src={Img}

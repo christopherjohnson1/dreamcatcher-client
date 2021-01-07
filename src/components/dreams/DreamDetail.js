@@ -14,7 +14,6 @@ export const DreamDetail = (props) => {
         const dreamId = parseInt(props.match.params.dreamId)
         getSingleDream(dreamId)
     }, [])
-    console.log(singleDream)
 
     return (
         <div className="container">
