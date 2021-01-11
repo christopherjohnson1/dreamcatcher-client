@@ -18,10 +18,13 @@ export const DreamLand = (props) => {
                     <Container className="test">
                         
                         <Row>
-                            <Col className="text-center pt-y mb-2"><a href="https://www.dreamdictionary.org/" target="_blank" rel="noreferrer">Dream Dictionary</a></Col>
+                            <Col className="text-center pt-y mb-2"><a href="https://www.dreamdictionary.org/" target="_blank" rel="noreferrer">Dream Dictionary | Learn about some of the themes in your dreams</a></Col>
                         </Row>
                         <Row>
-                            <Col className="text-center pt-y mb-2"><a href="https://en.wikipedia.org/wiki/Lucid_dream" target="_blank" rel="noreferrer">Lucid Dream wiki</a></Col>
+                            <Col className="text-center pt-y mb-2"><a href="https://en.wikipedia.org/wiki/Lucid_dream" target="_blank" rel="noreferrer">Lucid Dream wiki | Learn about lucid dreams</a></Col>
+                        </Row>
+                        <Row>
+                            <Col className="text-center pt-y mb-2"><a href="https://www.wikihow.com/Lucid-Dream" target="_blank" rel="noreferrer">How to lucid dream | Steps to help you have lucid dreams</a></Col>
                         </Row>
                     </Container>
                 </Card>

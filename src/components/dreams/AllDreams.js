@@ -63,7 +63,7 @@ export const AllDreams = props => {
                     return <div>
                                 <Row>
                                     <Col>
-                                        <Card body className="my-3 d-flex dream-card">
+                                        <Card body className="my-3 d-flex">
                                             <Container>
                                                 <Row>
                                                     <Col>{d.date}</Col>
