@@ -63,6 +63,16 @@ export const DreamsProvider = (props) => {
         })
     }
 
+    const deleteDream = (dreamId) => new Promise(() => {
+        fetch(`http://localhost:8000/dreams/${dreamId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
+        .then(getAllDreams)
+    })
+
     return (
         <DreamsContext.Provider value={{
             dreams,
@@ -72,7 +82,8 @@ export const DreamsProvider = (props) => {
             getDreamsByUser,
             myDreams,
             getSingleDream,
-            singleDream
+            singleDream,
+            deleteDream
         }}>
             {props.children}
         </DreamsContext.Provider>
