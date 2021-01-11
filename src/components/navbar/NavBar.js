@@ -11,7 +11,7 @@ export const NavBar = (props) => {
 
     useEffect(() => {
         getProfile()
-    })
+    }, [])
 
     return (
         <>
