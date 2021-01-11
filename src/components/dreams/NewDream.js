@@ -18,6 +18,8 @@ export const NewDream = (props) => {
     const { getAllStressTypes, stressTypes } = useContext( StressTypeContext )
     const { addNewDream, dreams, getAllDreams, updateDream } = useContext( DreamsContext )
 
+    const titleDialog = React.createRef()
+
     // get dreamTypes, exerciseTypes, moonPhases, and stressTypes to populate the dropdown
     useEffect(() => {
         getAllDreams()
@@ -56,19 +58,21 @@ export const NewDream = (props) => {
         }
     }
 
-
+    
+    
     const handleControlledInputChange = (e) => {
-      const newDream = Object.assign({}, dream)     // create a copy
-      newDream[e.target.name] = e.target.value      // modify a copy
+        const newDream = Object.assign({}, dream)     // create a copy
+        newDream[e.target.name] = e.target.value      // modify a copy
       setDream(newDream)
     }
-
+    
     // changes the value of the checkbox
     const checkboxHandler = () => {
         setChecked(!checked)
     }
-
-    // saves dream changes if in editMode, or saves a new dream if not in edit mode
+    
+    // saves dream changes if in editMode, or saves a new dream if not in edit mode also checks to see if dream.title exists before creating a new dream
+    // if dream.title doesn't exist it will present the user with a modal telling them to add a title.
     const constructNewDream = () => {
         if (editMode) {
             updateDream({
@@ -82,7 +86,7 @@ export const NewDream = (props) => {
                 moon_phase_id: parseInt(dream.moon_phase_id)
             })
                 .then(() => props.history.push("/all-dreams/my-dreams"))
-        } else {
+        } else if (dream.title) {
             addNewDream({
                 title: dream.title,
                 dream_story: transcript.charAt(0).toUpperCase() + transcript.slice(1),
@@ -93,11 +97,19 @@ export const NewDream = (props) => {
                 moon_phase_id: parseInt(dream.moon_phase_id)
             })
                 .then(() => props.history.push("/all-dreams/my-dreams"))
+        } else {
+            titleDialog.current.showModal()
         }
     }
   
     return (
       <div className="container">
+
+            <dialog className="dialog dialog--password" ref={titleDialog}>
+                <div>Please enter a dream title.</div>
+                <button className="button--close" onClick={e => titleDialog.current.close()}>Close</button>
+            </dialog>
+
           {/* Begin Speech Recognition Section */}
         <div className="d-flex justify-content-center speech-recog">
           <FontAwesomeIcon className="start-recording" onClick={startListening} icon={faMicrophoneAlt} />

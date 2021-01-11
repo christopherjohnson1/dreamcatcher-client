@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { DreamsContext } from "./DreamsProvider"
+import { ProfileContext } from "../auth/AuthProvider"
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
 import Container from 'react-bootstrap/Container'
@@ -8,12 +9,17 @@ import Col from 'react-bootstrap/Col'
 import "./DreamDetail.css"
 
 export const DreamDetail = (props) => {
-    const { getSingleDream, singleDream } = useContext(DreamsContext)
+    const { getSingleDream, singleDream, deleteDream } = useContext(DreamsContext)
+    const { profile } = useContext(ProfileContext)
 
     useEffect(() => {
         const dreamId = parseInt(props.match.params.dreamId)
         getSingleDream(dreamId)
     }, [])
+
+    const [deleteWarning, setDeleteWarning] = useState(false)
+
+    const profileMatch = profile.id === singleDream.user_id
 
     return (
         <div className="container">
@@ -49,11 +55,36 @@ export const DreamDetail = (props) => {
                 <Row>
                     <Col className="text-left"><b>Dream Date:</b> {singleDream.date}</Col>
                 </Row>
+                <>
+                { deleteWarning
+                ? <div className="alert alert-danger" role="alert">
+                Are you sure you want to delete this post?
+                <button className = "btn btn-secondary mx-3" onClick={() => {deleteDream(singleDream.id).then(props.history.push('/all-dreams/my-dreams'))}}>Yes, delete</button>
+                <button className = "btn btn-secondary mx-3" onClick={() => {setDeleteWarning(false)}}>No, cancel</button>
+                </div>
+                : ''
+                }
+                </>
                 <Row>
-                    <Col className="text-center mt-5 mb-5">
-                        <Button variant="danger" onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
-                    </Col>
+                    
                 </Row>
+                <Row>
+                    {profileMatch ? 
+                        <>
+                        <Col className="text-center mt-5 mb-5">
+                            <Button variant="danger" onClick={() => {props.history.push('/all-dreams/my-dreams')}}>Go Back</Button>
+                        </Col> 
+                        <Col className="text-center mt-5 mb-5">
+                            <Button variant="warning" onClick={() => {setDeleteWarning(true)}}>Delete Dream</Button>
+                        </Col> 
+                        </>
+                        :
+                        <Col className="text-center mt-5 mb-5">
+                            <Button variant="danger" onClick={() => {props.history.push('/all-dreams')}}>Go Back</Button>
+                        </Col>
+                    }
+                </Row>
+                
             </div>
         </div>
     )

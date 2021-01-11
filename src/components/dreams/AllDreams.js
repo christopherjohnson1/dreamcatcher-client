@@ -5,7 +5,9 @@ import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button' 
 import './AllDreams.css'
+
 
 export const AllDreams = props => {
     const { getAllDreams, dreams, getDreamsByUser, myDreams } = useContext(DreamsContext)
@@ -18,19 +20,15 @@ export const AllDreams = props => {
 
     // initialization effect hook to get dreams
     useEffect(() => {
-        if (props.match) {
-            if (props.match.path === '/all-dreams/my-dreams') {
-                if (profile.user) {
-                    getAllDreams()
-                    getDreamsByUser(profile.user.id)
-                    setView('mydreams')
-                    setShowOthersDreams(false)
-                }
+        getAllDreams()
+        setShowOthersDreams(true)
+        if (props.match.path === '/all-dreams/my-dreams') {
+            if (profile.user) {
+                getAllDreams()
+                getDreamsByUser(profile.user.id)
+                setView('mydreams')
+                setShowOthersDreams(false)
             }
-        }
-        else {
-            getAllDreams()
-            setShowOthersDreams(true)
         }
     }, [profile, props.match])
     
@@ -49,32 +47,43 @@ export const AllDreams = props => {
                         return <Card body className="my-3 d-flex dream-card"
                                     onClick={() => {props.history.push(`/dream-detail/${d.id}`)}}>
                                 <Container>
-                                    <Row>
+                                    <Row className="pb-2">
                                         <Col>{d.date}</Col>
                                         <Col className="text-center">{d.title}</Col>
                                         <Col className="text-center"><img className="profile-photo-small" src={d.user.profile_photo} alt="" /></Col>
                                     </Row>
                                     <Row>
-                                        <Col className="text-center pt-4">{d.dream_type.label}</Col>
+                                        <Col data-status={d.dream_type.label} className="text-center pt-1 dream-type">{d.dream_type.label}</Col>
                                     </Row>
                                 </Container>
                             </Card>
                     }
                 }) 
                 : myDreams.map(d => {
-                    return <Card body className="my-3 d-flex dream-card"
-                    onClick={() => {props.history.push(`/new-dream/edit/${d.id}`)}}>
-                    <Container>
-                        <Row>
-                            <Col>{d.date}</Col>
-                            <Col className="text-center">{d.title}</Col>
-                            <Col className="text-center">{profile.full_name}</Col>
-                        </Row>
-                        <Row>
-                            <Col className="text-center pt-4">{d.dream_type.label}</Col>
-                        </Row>
-                    </Container>
-                </Card>
+                    return <div>
+                                <Row>
+                                    <Col>
+                                        <Card body className="my-3 d-flex">
+                                            <Container>
+                                                <Row>
+                                                    <Col>{d.date}</Col>
+                                                    <Col className="text-center">{d.title}</Col>
+                                                    <Col className="text-center">{profile.full_name}</Col>
+                                                </Row>
+                                                <Row>
+                                                <Col data-status={d.dream_type.label} className="text-center pt-1 dream-type">{d.dream_type.label}</Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col className="py-2 text-center"><Button variant="info" 
+                                                    onClick={() => {props.history.push(`/dream-detail/${d.id}`)}}>View Dream</Button></Col>
+                                                    <Col className="py-2 text-center"><Button variant="danger" 
+                                                    onClick={() => {props.history.push(`/new-dream/edit/${d.id}`)}}>Edit Dream</Button></Col>
+                                                </Row>
+                                            </Container>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                        </div>
                 })}
 
         </div>

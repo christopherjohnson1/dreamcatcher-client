@@ -31,3 +31,7 @@
 .reset-recording:hover {
     color: #6b6969;
 }
+
+.dream-delete {
+    cursor: pointer;
+}

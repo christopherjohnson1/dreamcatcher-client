@@ -1,3 +1,4 @@
+import React, { useEffect } from "react"
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
 import "./NavBar.css"
@@ -6,7 +7,11 @@ import { useContext } from 'react'
 import { ProfileContext } from '../auth/AuthProvider'
 
 export const NavBar = (props) => {
-    const { profile } = useContext(ProfileContext)
+    const { profile, getProfile } = useContext(ProfileContext)
+
+    useEffect(() => {
+        getProfile()
+    })
 
     return (
         <>

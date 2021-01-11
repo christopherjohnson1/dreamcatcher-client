@@ -16,3 +16,80 @@
     background-position: center center;
     background-size: cover;
 }
+
+.dream-type[data-status="Normal dream"] {
+    background-color: #a2d5c6;
+    color: white;
+}
+
+.dream-type[data-status="Lucid dream"] {
+    background-color: #077b8a ;
+    color: white;
+}
+
+.dream-type[data-status="Nightmare"] {
+    background-color: red;
+    color: black;
+}
+
+.dream-type[data-status="Not sure"] {
+    background-color: white;
+    color: black;
+}
+
+.dream-type[data-status="Sleep paralysis"] {
+    background-color: black;
+    color: red;
+}
+
+.dream-type[data-status="Daydream"] {
+    background-color: #077b8a ;
+    color: white;
+}
+
+.dream-type[data-status="False awakening"] {
+    background-color: #FBFF01 ;
+    color: black;
+}
+
+.dream-type[data-status="Healing dream"] {
+    background-color: #779CAF ;
+    color: white;
+}
+
+.dream-type[data-status="Prophetic dream"] {
+    background-color: #779CAF ;
+    color: white;
+}
+
+.dream-type[data-status="Vivid dream"] {
+    background-color: #5c3c92;
+    color: white;
+}
+
+.dream-type[data-status="Sexual dream"] {
+    background-color: #d72631;
+    color: white;
+}
+
+.dream-type[data-status="Auditory dream"] {
+    background-color: #d1ce1a;
+    color: white;
+}
+
+.dream-type[data-status="Cosmic dream"] {
+    background-color: #6C396C ;
+    color: white;
+}
+
+.dream-type[data-status="Deja Vu dream"] {
+    background-color: #EC00FC ;
+    color: white;
+}
+
+.dream-type[data-status="Out of body experience"] {
+    background-color: gold ;
+    color: black;
+}
+
+
