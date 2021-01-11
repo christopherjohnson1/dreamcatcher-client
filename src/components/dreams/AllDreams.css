@@ -87,3 +87,8 @@
     color: white;
 }
 
+.dream-type[data-status="Out of body experience"] {
+    background-color: gold ;
+    color: black;
+}
+
